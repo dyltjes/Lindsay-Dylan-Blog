@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <title>Lindsay Trivia Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel ="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-r from-purple-400 to-pink-300 min-h-screen flex items-center justify-center font-inter">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="index.html">Back to Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Latest Post</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="resume.html">resume</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full text-center">
+        <h1 class="text-3xl font-semibold text-blue-600 mb-6">Lindsay Trivia Game</h1>
+        <div id="question-container" class="mb-6">
+            <p id="question-text" class="text-lg text-gray-800"></p>
+            <div id="answer-options" class="mt-4 grid grid-cols-2 gap-4">
+                <button id="answer-1" class="answer-button bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-md p-3 transition duration-300 ease-in-out shadow-md"></button>
+                <button id="answer-2" class="answer-button bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-md p-3 transition duration-300 ease-in-out shadow-md"></button>
+                <button id="answer-3" class="answer-button bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-md p-3 transition duration-300 ease-in-out shadow-md"></button>
+                <button id="answer-4" class="answer-button bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-md p-3 transition duration-300 ease-in-out shadow-md"></button>
+            </div>
+            <p id="feedback" class="mt-4 font-medium"></p>
+        </div>
+        <div id="results-container" class="hidden mt-6">
+            <h2 class="text-2xl font-semibold text-green-600 mb-4">Results</h2>
+            <p id="final-score" class="text-lg text-gray-800 mb-4"></p>
+            <button id="restart-button" class="bg-green-500 hover:bg-green-600 text-white font-semibold rounded-md py-2 px-4 transition duration-300 ease-in-out shadow-md">Play Again</button>
+        </div>
+        <p id="timer-display" class="mt-4 text-gray-600"></p>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is Lindsay's favorite color?",
+                answers: ["Blue", "Green", "Purple", "Pink"],
+                correctAnswer: "Pink"
+            },
+            {
+                question: "What is Lindsay's favorite food?",
+                answers: ["Pizza", "Sushi", "Tacos", "Pasta"],
+                correctAnswer: "Sushi"
+            },
+            {
+                question: "What is Lindsay's favorite movie?",
+                answers: ["Pride & Prejudice", "The Notebook", "Zootopia", "Lord of the Rings"],
+                correctAnswer: "Lord of the Rings"
+            },
+             {
+                question: "What is Lindsay's favorite animal?",
+                answers: ["Dog", "Cat", "Duck", "Horse"],
+                correctAnswer: "Duck"
+            },
+            {
+                question: "What is Lindsay's favorite hobby?",
+                answers: ["Reading", "Hiking", "Painting", "Coloring"],
+                correctAnswer: "Reading"
+            },
+            {
+                question: "What is Lindsay's middle name?",
+                answers: ["Marie", "Elizabeth", "Rose", "Grace"],
+                correctAnswer: "Marie"
+            },
+            {
+                question: "What city was Lindsay born in?",
+                answers: ["Provo", "Houston", "Salt Lake City", "Dallas"],
+                correctAnswer: "Provo"
+            },
+            {
+                question: "What is Lindsay's favorite season?",
+                answers: ["Spring", "Summer", "Autumn", "Winter"],
+                correctAnswer: "Autumn"
+            },
+            {
+                question: "What type of music does Lindsay enjoy most?",
+                answers: ["Country", "Pop", "Classical", "Indie"],
+                correctAnswer: "Indie"
+            },
+            {
+                question: "What is Lindsay's favorite drink?",
+                answers: ["Mountain Dew", "Herbal Tea", "Diet Coke", "Smoothie"],
+                correctAnswer: "Diet Coke"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = [];
+        let timeLeft = 20;
+        let timerId;
+        let isMuted = false; // Added for mute functionality
+
+
+        const questionText = document.getElementById("question-text");
+        const answerOptions = document.getElementsByClassName("answer-button");
+        const feedback = document.getElementById("feedback");
+        const resultsContainer = document.getElementById("results-container");
+        const finalScore = document.getElementById("final-score");
+        const restartButton = document.getElementById("restart-button");
+        const timerDisplay = document.getElementById("timer-display");
+
+
+        function loadQuestion() {
+            if (currentQuestionIndex < questions.length) {
+                const currentQuestion = questions[currentQuestionIndex];
+                questionText.textContent = currentQuestion.question;
+
+                for (let i = 0; i < answerOptions.length; i++) {
+                    answerOptions[i].textContent = currentQuestion.answers[i];
+                    answerOptions[i].onclick = () => handleAnswer(currentQuestion.answers[i]);
+                }
+                feedback.textContent = "";
+                startTimer();
+            } else {
+                endGame();
+            }
+        }
+
+        function handleAnswer(selectedAnswer) {
+            clearInterval(timerId);
+            userAnswers.push(selectedAnswer);
+            const correctAnswer = questions[currentQuestionIndex].correctAnswer;
+
+            if (selectedAnswer === correctAnswer) {
+                score++;
+                feedback.textContent = "Correct!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = "Incorrect!";
+                feedback.style.color = "red";
+            }
+
+            currentQuestionIndex++;
+            setTimeout(loadQuestion, 1000);
+        }
+
+        function startTimer() {
+            timeLeft = 20;
+            timerDisplay.textContent = `Time Left: ${timeLeft} seconds`;
+            timerId = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = `Time Left: ${timeLeft} seconds`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerId);
+                    handleAnswer(null); // Treat as incorrect answer
+                }
+            }, 1000);
+        }
+
+
+        function endGame() {
+            clearInterval(timerId);
+            questionText.textContent = "";
+            Array.from(answerOptions).forEach(button => button.style.display = "none");
+            resultsContainer.classList.remove("hidden");
+            finalScore.textContent = `You scored ${score} out of ${questions.length}.`;
+        }
+
+        function restartGame() {
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = [];
+            timeLeft = 20;
+            resultsContainer.classList.add("hidden");
+            Array.from(answerOptions).forEach(button => button.style.display = "block");
+            loadQuestion();
+        }
+
+
+        restartButton.onclick = restartGame;
+
+        loadQuestion(); // Start the game
+    </script>
+</body>
+</html>
